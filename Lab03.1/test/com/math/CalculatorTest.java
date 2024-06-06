@@ -9,13 +9,55 @@
 package com.math;
 
 import static org.junit.Assert.*;
-import org.junit.Test;
 
-public class CalculatorTest {
+import org.junit.*;
+
+public class CalculatorTest {   // Has to be a public class so the JUnit can see it
+    // business object(s) under test - called a "fixture"
+    private Calculator calc;
+
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        System.out.println("beforeClass");
+    }
+
+    @AfterClass
+    public static void afterClass() throws Exception {
+        System.out.println("afterClass");
+    }
+
+    @Before
+    public void setUp() {
+        System.out.println("setUp");
+        calc = new Calculator();
+    }
+
+    @After
+    public void cleanUp() {
+        System.out.println("cleanUP");
+    }
+
+    @Test
+    public void testISEven() {
+        System.out.println("testIsEven");
+
+        assertTrue(calc.isEven(10));
+        assertFalse(calc.isEven(11));
+    }
+
+    @Test
+    public void testDivide() {
+        System.out.println("testDivide");
+
+        assertEquals(2.5, calc.divide(5, 2), .001); // expected, actual, delta
+    }
 
     @Test
     public void testAdd() {
-        Calculator calc = new Calculator();
+        System.out.println("testAdd");
+
         assertEquals(5, calc.add(1, 4));  // expected, actual
     }
+
+
 }
