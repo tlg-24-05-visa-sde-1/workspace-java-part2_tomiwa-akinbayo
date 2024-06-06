@@ -2,6 +2,10 @@ package com.entertainment;
 
 import java.util.Objects;
 
+/*
+NOTE: To be consistent with equals, you must use the same sort key(s) as
+you're using in hte equals method - Here is (brand, volume)
+ */
 public class Television implements Comparable<Television> {
     private String brand;
     private int volume;
@@ -80,9 +84,15 @@ public class Television implements Comparable<Television> {
 
     @Override
     public int compareTo(Television other) {
-        return this.getBrand().compareTo(other.getBrand());
+        int result = this.getBrand().compareTo(other.getBrand());
+
+        if(result == 0){
+            result = Integer.compare(this.getVolume(), other.getVolume());
+        }
+        return result;
     }
 
+    @Override
     public String toString() {
         return String.format(getClass().getSimpleName() + "brand= %s, volume= %s, currentChannel= %s",
                 getBrand(), getVolume(), getCurrentChannel());
