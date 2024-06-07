@@ -6,16 +6,11 @@
  * Copyright LearningPatterns Inc.
  */
 
-package com.javatunes.catalog.test;
-
-import com.javatunes.catalog.Catalog;
-import com.javatunes.catalog.InMemoryCatalog;
-import com.javatunes.catalog.MusicCategory;
-import com.javatunes.catalog.MusicItem;
+package com.javatunes.catalog;
 
 import java.util.Collection;
 
-class InMemoryCatalogTest {
+class InMemoryCatalogTestMain {
 
     /*
      * One by one, complete each test method below, and then "activate" it by
@@ -33,6 +28,9 @@ class InMemoryCatalogTest {
         // testFindSelfTitle();
         // testPriceRocks(13.00);
         // testAveragePrice();
+        // testGetAll();
+        // testFindCheapest(MusicCategory.POP);
+        // testGenreAveragePrice(MusicCategory.CLASSICAL);
 
     }
 
@@ -63,6 +61,9 @@ class InMemoryCatalogTest {
     }
 
     private static void testGetAll() {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        Collection<MusicItem> data = catalog.getAll();
+        dump(data);
     }
 
     private static void testFindSelfTitle() {
@@ -81,6 +82,18 @@ class InMemoryCatalogTest {
         InMemoryCatalog catalog = new InMemoryCatalog();
         System.out.println(catalog.averagePrice());
     }
+
+    private static void testFindCheapest(MusicCategory genre) {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        Collection<MusicItem> cheap = catalog.findCheapest(MusicCategory.ROCK);
+        dump(cheap);
+    }
+
+    private static void testGenreAveragePrice(MusicCategory genre) {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        System.out.println(catalog.genreAveragePrice(genre));
+    }
+
 
     private static void dump(Collection<MusicItem> items){
         for(MusicItem item: items){

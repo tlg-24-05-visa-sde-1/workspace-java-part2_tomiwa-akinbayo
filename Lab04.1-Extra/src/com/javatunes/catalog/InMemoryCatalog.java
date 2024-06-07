@@ -11,6 +11,7 @@ package com.javatunes.catalog;
 import java.time.chrono.MinguoChronology;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 // OF COURSE THIS CLASS DOESN'T COMPILE
@@ -111,7 +112,7 @@ public class InMemoryCatalog implements Catalog {
      */
     @Override
     public Collection<MusicItem> getAll() {
-        return List.of();
+        return Collections.unmodifiableCollection(catalogData);
         // collection.unmodifiableList
     }
 
@@ -152,14 +153,14 @@ public class InMemoryCatalog implements Catalog {
         return result;
     }
 
-
     /**
      * TASK: find all "rock" items whose price is less than or equal to the specified price.
      */
     public Collection<MusicItem> priceRocks(double price) {
         Collection<MusicItem> result = new ArrayList<>();
         for(MusicItem item : catalogData){
-            if(item.getMusicCategory().equals(MusicCategory.ROCK) && item.getPrice() <= price){
+            if((item.getMusicCategory().equals(MusicCategory.ROCK)
+                    || item.getMusicCategory().equals(MusicCategory.CLASSIC_ROCK)) && item.getPrice() <= price){
                 result.add(item);
             }
         }
@@ -189,11 +190,41 @@ public class InMemoryCatalog implements Catalog {
     /**
      * TASK: find the cheapest item with the specified genre (MusicCategory).
      */
+    public Collection<MusicItem> findCheapest(MusicCategory genre) {
+        Collection<MusicItem> cheapest = new ArrayList<>();
+        double min = 50.0;
+        for(MusicItem item : catalogData) {
+            if(item.getMusicCategory().equals(genre)){
+                if(item.getPrice() < min){
+                    min = item.getPrice();
+                    cheapest.clear();
+                    cheapest.add(item);
+                } else if (item.getPrice() == min) {
+                    cheapest.add(item);
+                }
+            }
+        }
+        return cheapest;
+    }
 
 
     /**
      * TASK: find the average price of items in the specified genre (MusicCategory).
      */
+
+    public double genreAveragePrice(MusicCategory genre) {
+        Collection<MusicItem> specGenre = new ArrayList<>();
+        double sum = 0.0;
+        double avg;
+        for(MusicItem item : catalogData) {
+            if (item.getMusicCategory().equals(genre)) {
+                specGenre.add(item);
+                sum += item.getPrice();
+            }
+        }
+        avg = sum / specGenre.size();
+        return avg;
+    }
 
 
     /**
