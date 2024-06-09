@@ -10,12 +10,49 @@ package com.entertainment.catalog;
 
 import static org.junit.Assert.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.Test;
 import com.entertainment.Television;
 
 public class CatalogTest {
+
+    @Test
+    public void findLoudest_TelevisionInCatalog() {
+        Collection<Television> tv = Catalog.getInventory();
+        int loudest = 0;
+        for(Television item : tv) {
+            if(item.getVolume() > loudest){
+                loudest = item.getVolume();
+            }
+        }
+        assertEquals(94, loudest);
+
+    }
+
+    @Test
+    public void removeDuplicates() {
+        Collection<Television> tv = Catalog.getInventory();
+        Set<Television> newTv = new HashSet<>(tv);
+
+        assertEquals(23, newTv.size());
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void getInventory_shouldThrowException_ifModified()
+    throws UnsupportedOperationException{
+        Collection<Television> tv = Catalog.getInventory();
+
+        tv.add(new Television("LG", 0));
+    }
+
+    @Test
+    public void getInventory_shouldReturn_entireTelevisionArrayList() {
+        Collection<Television> tv = Catalog.getInventory();
+        assertEquals(30, tv.size());
+    }
 
     @Test
     public void findByBrands_shouldReturnPopulatedMap_brandsPassed() {

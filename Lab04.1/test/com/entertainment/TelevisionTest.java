@@ -9,14 +9,21 @@
 package com.entertainment;
 
 import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TelevisionTest {
+    private Television tv;
+
+    @Before
+    public void setUp() {
+        tv = new Television();
+    }
 
     @Test
     public void testSetVolume() {
-        Television tv = new Television();
-
         tv.setVolume(0);    // valid volume, min value
         assertEquals(0, tv.getVolume());
 
@@ -32,7 +39,6 @@ public class TelevisionTest {
      */
     @Test
     public void testSetVolumeIllegalArgumentException() {
-        Television tv = new Television();
 
         try {
             tv.setVolume(-1);  // if method works correctly, exception is thrown and control jumps to catch block
@@ -53,8 +59,6 @@ public class TelevisionTest {
 
     @Test
     public void testChangeChannel() throws InvalidChannelException {  // throws clause needed because it's an unhandled checked exception
-        Television tv = new Television();
-
         tv.changeChannel(1);    // valid channel, min value
         assertEquals(1, tv.getCurrentChannel());
 
@@ -72,14 +76,12 @@ public class TelevisionTest {
      */
     @Test(expected=InvalidChannelException.class)
     public void testChangeChannelInvalidChannelException_LowerBound() throws InvalidChannelException {  // unhandled checked exception
-        Television tv = new Television();
         tv.changeChannel(0);
         tv.changeChannel(1000);  // WRONG: this is never reached, need another test method (see next test method)
     }
 
     @Test(expected=InvalidChannelException.class)
     public void testChangeChannelInvalidChannelException_UpperBound() throws InvalidChannelException {  // unhandled checked exception
-        Television tv = new Television();
         tv.changeChannel(1000);
     }
 

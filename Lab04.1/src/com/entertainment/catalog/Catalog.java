@@ -64,7 +64,7 @@ public class Catalog {
      *  This is an all-static utility class, not the java.util.Collection interface.
      */
     public static Collection<Television> getInventory() {
-        return catalog;
+        return Collections.unmodifiableCollection(catalog);
     }
 
     /*
