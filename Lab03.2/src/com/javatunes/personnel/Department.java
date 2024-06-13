@@ -25,7 +25,8 @@ public class Department {
     }
 
     public void listEmployees() {
-        employees.forEach(emp -> System.out.println(emp));
+        // method reference
+        employees.forEach(System.out::println);  // lambda: emp -> System.out.println(emp)
 
 
 /*        for (Employee emp : employees) {
