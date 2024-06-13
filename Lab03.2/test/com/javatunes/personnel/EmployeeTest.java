@@ -13,11 +13,11 @@ public class EmployeeTest {
 
     @Before
     public void setUp() {
-//        emp1 = new DummyEmployee("Tomiwa", Date.valueOf("2020-09-08"));
-//        emp2 = new DummyEmployee("Tomiwa", Date.valueOf("2020-09-08"));
+        emp1 = new DummyEmployee("Tomiwa", Date.valueOf("2020-09-08"));
+        emp2 = new DummyEmployee("Tomiwa", Date.valueOf("2020-09-08"));
 
-        emp1 = getEmployee();
-        emp2 = getEmployee();
+//        emp1 = getEmployee();
+//        emp2 = getEmployee();
     }
 
     private static Employee getEmployee() {
