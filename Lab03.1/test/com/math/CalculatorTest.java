@@ -12,8 +12,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class CalculatorTest {   // Has to be a public class so the JUnit can see it
-    // business object(s) under test - called a "fixture"
+public class CalculatorTest {   // Has to be a public class so the JUnit can see it    // business object(s) under test - called a "fixture"
     private Calculator calc;
 
     @BeforeClass
